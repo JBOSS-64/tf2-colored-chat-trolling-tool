@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TF2 Colored Chat Messages Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page" id="startPage">
+  <div>
+    <h1>TF2 Chat Trolling Tool</h1>
+    <p class="instructions">
+      A tool for trolling people with fake messages using TF2 colored chat
+    </p>
+    <p>What would you like to do?</p>
+    <button id="nameTrollButton">Name Steal</button>
+    <button id="fakeAchievementButton">Achievement Message</button>
+    <button id="fakeItemButton">Item Message</button>
+    <button id="customButton">Custom</button>
+  </div>
+  <p>
+    For an in-depth guide, check out
+    <a
+      href="https://steamcommunity.com/sharedfiles/filedetails/?id=3453357190"
+      target="_blank"
+      >this</a
+    >
+    Steam guide.
+  </p>
+  <p class="instructions2">
+    When doing this make sure you only paste in chat while you are dead or
+    spectating, and only paste in team chat while you are alive, otherwise it
+    won't work and you'll look like an idiot (I recommend testing in a private
+    server so you don't embarrass yourself)
+  </p>
+</div>
+
+<div id="nameTrollPage" class="page" style="display: none">
+  <h1>Name Trolling</h1>
+  <p class="instructions">
+    To steal someone's name, first copy this character: ุ and set it as your
+    Steam username so that in-game, you appear to have a blank name.
+  </p>
+  <p>What is your target's name?</p>
+  <input type="text" id="targetName" placeholder="Enter name here" />
+
+  <p>
+    What is your target's team?<br />
+    <label><input type="radio" name="color" value="ff3333" /> Red</label>
+    <label><input type="radio" name="color" value="99CCFF" /> Blue</label>
+    <label>
+      <input type="radio" name="color" value="custom" />
+      Custom
+    </label>
+  </p>
+  <div id="customColorBox" style="display: none">
+    Custom Color:
+    <input type="color" id="customTeamColor" value="#ff0000" />
+  </div>
+  <p>What would you like <span class="target">someone else</span> to do?</p>
+
+  <button id="trollMessageButton">Send Message</button>
+  <button id="trollAchievementButton">Unlock Achievement</button>
+  <button id="trollItemButton">Get Item</button>
+
+  <div id="sendMessageAsTroll" style="display: none">
+    <p>What would you like <span class="target">someone else</span> to say?</p>
+    <p class="instructions">Leave this blank to copy the template</p>
+    <input type="text" id="fakeMessage" placeholder="Enter message here" />
+    <p><span class="target"></span>'s message:</p>
+    <p id="trollMessagePreview">
+      <span id="namePreview" class="target">name</span> :
+      <span id="fakeText"></span>
+    </p>
+    <button id="copyTrollBtn">Copy Message</button>
+    <textarea
+      id="hiddenCopyTrollText"
+      style="position: absolute; left: -9999px"
+    ></textarea>
+  </div>
+
+  <div id="unlockAchievementAsTroll" style="display: none">
+    <p>
+      What achievement would you like <span class="target">name</span> to
+      "earn"?
+    </p>
+    <p class="instructions">Leave this blank to copy the template</p>
+    <input
+      type="text"
+      id="trollAchievementName"
+      placeholder="Enter achievement name"
+    />
+    <button id="copyTrollAchievementBtn">Copy Message</button>
+    <textarea
+      id="hiddenCopyAchievmentTrollText"
+      style="position: absolute; left: -9999px"
+    ></textarea>
+  </div>
+  <div id="getItemAsTroll" style="display: none">
+    <p>
+      How would you like <span class="target">name</span> to get their item?
+    </p>
+    <select id="trollMethodDropdown">
+      <option value="has found: " data-method="get"></option>
+      <option value="has found: " data-method="find">Finding</option>
+      <option value="has crafted: " data-method="craft">Crafting</option>
+      <option value="has traded for: " data-method="trade for">Trading</option>
+      <option value="has unboxed: " data-method="unbox">Unboxing</option>
+    </select>
+
+    <p>
+      What item would you like <span class="target">name</span> to
+      <span id="trollMethodText">get</span>?
+    </p>
+    <p class="instructions">Leave this blank to copy the template</p>
+    <input type="text" id="trollItemNameInput" placeholder="Input item name" />
+
+    <select id="trollRarityDropdown">
+      <option value="B2B2B2">Normal</option>
+      <option value="FFD700">Unique</option>
+      <option value="476291">Vintage</option>
+      <option value="4D7455">Genuine</option>
+      <option value="CF6A32">Strange</option>
+      <option value="AA0000">Collector's</option>
+      <option value="830000">Collector's (old)</option>
+      <option value="FAFAFA">Decorated</option>
+      <option value="B0C3D9">Civilian</option>
+      <option value="5E98D9">Freelance</option>
+      <option value="4B69FF">Mercenary</option>
+      <option value="8847FF">Commando</option>
+      <option value="D32CE6">Assassin</option>
+      <option value="EB4B4B">Elite</option>
+      <option value="8650AC">Unusual</option>
+      <option value="38F3AB">Haunted</option>
+      <option value="70B04A">Community/Self-made</option>
+      <option value="A50F79">Valve</option>
+      <option value="8D834B">Rarity2 (unused)</option>
+      <option value="70550F">Rarity3 (unused)</option>
+      <option value="custom">Custom Color</option>
+    </select>
+    <input type="color" style="display: none" id="trollRarityColor" />
+    <p>Preview:</p>
+    <p id="itemTrollMessagePreview">
+      <span class="target"></span> <span id="previewTrollMethod"></span
+      ><span id="previewTrollItem"></span>
+    </p>
+
+    <button id="copyTrollItemBtn">Copy</button>
+
+    <p>
+      <textarea
+        id="hiddenCopyTrollItemText"
+        style="position: absolute; left: -9999px"
+      ></textarea>
+    </p>
+  </div>
+
+  <p><button id="trollBack" class="backButton">Back</button></p>
+</div>
+
+<div id="fakeAchievementPage" class="page" style="display: none">
+  <h1>Fake Achievement Message</h1>
+  <p>What achievement would you like to "earn"?</p>
+  <input
+    type="text"
+    id="achievementName"
+    placeholder="Enter achievement name"
+  />
+  <button id="copyAchievementBtn">Copy</button>
+  <p>
+    <textarea
+      id="hiddenCopyAchievementText"
+      style="position: absolute; left: -9999px"
+    ></textarea>
+    <button class="backButton">Back</button>
+  </p>
+</div>
+
+<div id="fakeItemPage" class="page" style="display: none">
+  <h1>Fake Item Message</h1>
+  <p>How would you like to get your item?</p>
+  <select id="methodDropdown">
+    <option value="has found: " data-method="get"></option>
+    <option value="has found: " data-method="find">Finding</option>
+    <option value="has crafted: " data-method="craft">Crafting</option>
+    <option value="has traded for: " data-method="trade for">Trading</option>
+    <option value="has unboxed: " data-method="unbox">Unboxing</option>
+  </select>
+
+  <p>What item would you like to <span id="methodText">get</span>?</p>
+  <input type="text" id="itemNameInput" placeholder="Input item name" />
+
+  <select id="rarityDropdown">
+    <option value="B2B2B2">Normal</option>
+    <option value="FFD700">Unique</option>
+    <option value="476291">Vintage</option>
+    <option value="4D7455">Genuine</option>
+    <option value="CF6A32">Strange</option>
+    <option value="AA0000">Collector's</option>
+    <option value="830000">Collector's (old)</option>
+    <option value="FAFAFA">Decorated</option>
+    <option value="B0C3D9">Civilian</option>
+    <option value="5E98D9">Freelance</option>
+    <option value="4B69FF">Mercenary</option>
+    <option value="8847FF">Commando</option>
+    <option value="D32CE6">Assassin</option>
+    <option value="EB4B4B">Elite</option>
+    <option value="8650AC">Unusual</option>
+    <option value="38F3AB">Haunted</option>
+    <option value="70B04A">Community/Self-made</option>
+    <option value="A50F79">Valve</option>
+    <option value="8D834B">Rarity2 (unused)</option>
+    <option value="70550F">Rarity3 (unused)</option>
+    <option value="custom">Custom Color</option>
+  </select>
+  <input type="color" style="display: none" id="rarityColor" />
+  <p>Preview:</p>
+  <p id="itemMessagePreview">
+    <span id="previewMethod"></span><span id="previewItem"></span>
+  </p>
+
+  <button id="copyItemBtn">Copy</button>
+
+  <p>
+    <textarea
+      id="hiddenCopyItemText"
+      style="position: absolute; left: -9999px"
+    ></textarea>
+    <button class="backButton">Back</button>
+  </p>
+</div>
+
+<div class="page" id="customPage" style="display: none">
+  <h1>TF2 Colored Chat Messages Tool</h1>
+  <p>
+    For a completely customizable colored chat message generator, check out
+    <a href="https://proto.tf/tf2_chat/" target="_blank">this</a>
+    website.
+  </p>
+  <button class="backButton">Back</button>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
