@@ -155,7 +155,6 @@ input[type="radio"]:hover {
 .page[style*="display: none"] {
   opacity: 0;
 }
-
 #fixedLink {
   position: fixed;
   bottom: 0;
@@ -179,6 +178,8 @@ input[type="radio"]:hover {
 }
 
 
+
+/* ✅ Mobile tweaks */
 @media (max-width: 600px) {
   .page {
     margin: 1rem 1rem;
@@ -195,5 +196,3 @@ input[type="radio"]:hover {
     width: 100%;
   }
 }
-
-
